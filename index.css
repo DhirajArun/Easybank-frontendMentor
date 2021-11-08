@@ -1,0 +1,675 @@
+/* border-box */
+*,
+*:after,
+*::before {
+  box-sizing: border-box;
+}
+
+/* ========================== */
+/* changing defaults          */
+/* ========================== */
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul a {
+  color: inherit;
+}
+
+img,
+picture {
+  max-width: 100%;
+}
+
+/* fixing-margins */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
+}
+
+/* body resetting */
+
+/* ====================== */
+/* variables              */
+/* ====================== */
+
+:root {
+  /* fonts-familes */
+  --ff-sans: "Public Sans", sans-serif;
+
+  /* colors--primary */
+  --clr-light-100: hsl(0, 0%, 100%);
+  --clr-dark-100: hsl(233, 26%, 24%);
+  /* colors--accents */
+  --clr-accent-1: hsl(136, 65%, 51%);
+  --clr-accent-2: hsl(192, 70%, 51%);
+  --clr-accent: linear-gradient(
+    to right,
+    var(--clr-accent-1),
+    var(--clr-accent-2)
+  );
+  /* colors--neutrals */
+  --clr-light-90: hsl(0, 0%, 98%);
+  --clr-light-80: hsl(220, 16%, 96%);
+  --clr-dark-90: hsl(233, 8%, 62%);
+
+  /* font-sizes */
+}
+
+/* ================= */
+/* Typography        */
+/* ================= */
+body {
+  font-family: var(--ff-sans);
+  font-size: 1rem;
+  text-align: center;
+  color: var(--clr-dark-90);
+
+  line-height: 1.6;
+}
+
+.articles {
+  font-size: 0.92rem;
+}
+
+footer {
+  color: var(--clr-light-80);
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--clr-dark-100);
+  line-height: 1.15;
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+  max-width: 70%;
+}
+
+h3 {
+  font-size: 1.3em; /* em -- so that inside articles h3 can be changed */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: var(--clr-accent-1);
+}
+
+.into p {
+  max-width: 41ch;
+}
+.features p {
+  max-width: 60ch;
+}
+
+/* card-fineprint inside the article card */
+.card-article img + p {
+  font-size: 0.8rem;
+}
+
+.fine-print {
+  font-size: 0.8rem;
+  color: var(--clr-dark-90);
+}
+
+@media (min-width: 768px) {
+  body {
+    text-align: left;
+    font-size: 1.125rem;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    max-width: 70%;
+  }
+
+  h3 {
+    font-size: 1.3em; /* em -- so that inside articles h3 can be changed */
+  }
+}
+
+/* ==================== */
+/* backgrounds */
+/* ==================== */
+body {
+  background-color: var(--clr-light-100);
+}
+
+/* intro */
+.into {
+  position: relative;
+  z-index: 10;
+}
+
+.intro-mockup {
+  position: relative;
+}
+
+.intro {
+  background-image: url(./images/bg-intro-mobile.svg);
+
+  background-size: 100%;
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+
+.intro img {
+  object-fit: cover;
+  display: block;
+
+  width: 83%;
+  height: 100%;
+
+  object-position: bottom center;
+
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .intro {
+    background-image: url(./images/bg-intro-desktop.svg);
+    /* background-size: contain cover; */
+    background-repeat: no-repeat;
+    background-position: 45vw bottom;
+  }
+
+  .intro img {
+    height: 115%;
+    object-position: left;
+    margin-inline: auto 0;
+  }
+}
+
+.features {
+  background-color: var(--clr-light-80);
+}
+
+.footer {
+  background-color: var(--clr-dark-100);
+}
+
+/* ================= */
+/* Utility class     */
+/* ================= */
+
+.flex {
+  display: flex;
+  gap: var(--gap, 1rem);
+}
+
+.grid {
+  display: grid;
+}
+
+.flow > *:where(:not(:first-child)) {
+  margin-top: var(--flow-space, 1rem);
+}
+
+.separator {
+  margin-bottom: var(--separator-space, 1rem);
+}
+
+/* ================= */
+/* Layout            */
+/* ================= */
+
+.container {
+  box-sizing: content-box;
+  max-width: 600px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: minmax(1rem, 1fr) minmax(0, 600px) minmax(1rem, 1fr);
+
+  place-items: center;
+}
+
+/* .primary-header {
+  grid-template-columns: minmax(1em, 1fr) repeat(2, minmax(0, 420px)) minmax(
+      1em,
+      1fr
+    );
+} */
+
+.grid-container > * {
+  grid-column: 2 / -2;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 1000px;
+  }
+
+  .grid-container {
+    grid-template-columns: minmax(1rem, 1fr) repeat(4, minmax(0, 250px)) minmax(
+        1rem,
+        1fr
+      );
+
+    column-gap: var(--column-gap, 1rem);
+    row-gap: var(--row-gap, 0);
+
+    justify-items: left;
+  }
+}
+
+/* ================= */
+/* components        */
+/* ================= */
+
+/* overlay */
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  opacity: 0.6;
+
+  background-color: var(--clr-dark-100);
+}
+
+/* navigation */
+.primary-header {
+  box-shadow: 2px 0px 3px grey;
+  background-color: white;
+
+  z-index: 1000;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.primary-header {
+  padding-block: 1.5rem;
+}
+
+header {
+  display: flex;
+  place-self: stretch; /* so that space-between can work */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mob-nav-toggle {
+  grid-area: btn;
+  justify-self: end;
+}
+
+.primary-header .btn {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .primary-header .btn {
+    display: block;
+  }
+}
+
+nav {
+  position: fixed;
+  background-color: var(--clr-light-100);
+  width: 90%;
+  max-width: 300px;
+
+  padding: 2rem;
+
+  top: 100px;
+  left: 0;
+  right: 0;
+
+  margin-inline: auto;
+  border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+  nav {
+    transition: opacity 250ms;
+  }
+  nav[data-visible="false"] {
+    opacity: 0;
+  }
+
+  nav[data-visible="true"] {
+    opacity: 1;
+  }
+}
+
+.nav-list {
+  display: flex;
+
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mob-nav-toggle {
+  border: 0;
+  background: none;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  width: 2rem;
+  height: 2rem;
+
+  cursor: pointer;
+}
+
+.mob-nav-toggle[aria-expanded="true"] {
+  background-image: url(./images/icon-close.svg);
+}
+
+.mob-nav-toggle[aria-expanded="false"] {
+  background-image: url(./images/icon-hamburger.svg);
+}
+
+nav a {
+  display: inline-block;
+  border-bottom: 4px solid transparent;
+}
+
+nav a:hover,
+nav a:focus {
+  color: var(--clr-dark-100);
+  border-color: var(--clr-accent-1);
+}
+
+@media (min-width: 600px) {
+  .primary-header {
+    padding: 0;
+  }
+
+  #modal-overlay {
+    display: none;
+  }
+
+  nav {
+    position: static;
+    width: max-content;
+
+    max-width: none;
+
+    padding: 0;
+    margin: 0;
+  }
+
+  nav a {
+    padding-block: 1.5rem;
+  }
+
+  .nav-list {
+    flex-direction: row;
+  }
+
+  .mob-nav-toggle {
+    display: none;
+  }
+}
+
+/* buttons */
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+
+  padding: 0.7em 1.7em;
+}
+
+.btn-primary {
+  background-image: var(--clr-accent);
+
+  border-radius: 1.5em;
+  color: var(--clr-light-100);
+
+  transition: padding 200ms ease-in-out;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  color: var(--clr-light-100);
+
+  padding-inline: 2.25em;
+}
+
+/* card */
+.card {
+  max-width: 400px;
+  cursor: pointer;
+}
+
+.card h3,
+.card p {
+  margin-inline: var(--card-padding, 1rem); /* for giving padding inside card */
+}
+
+/* card-feature */
+
+.card-feature span {
+  position: relative;
+  z-index: 1;
+}
+
+.card-feature span::after {
+  content: "";
+  background-color: var(--clr-accent-1);
+  width: 110%;
+  height: 15px;
+  display: block;
+  position: absolute;
+
+  top: 60%;
+  left: 0%;
+
+  z-index: -1;
+
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms;
+}
+
+.card-feature:hover span::after {
+  transform: scaleX(1);
+}
+
+@media (min-width: 768px) {
+  .card-feature {
+    --card-padding: 0rem;
+  }
+}
+
+/* card-article */
+.card-article {
+  padding-bottom: 2rem;
+  text-align: left;
+  border-radius: 10px;
+  overflow: hidden;
+
+  background-color: white;
+  box-shadow: 2px 2px 5px rgb(238, 238, 238);
+
+  transition: transform 250ms ease-in-out;
+}
+
+.card-article:hover {
+  transform: translateY(-6px);
+}
+
+.card-article img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .card-article img {
+    max-height: 170px; /* for forcing same height of image inside all card-articles. */
+  }
+
+  .card-feature p {
+    max-width: 99%; /* for forcing same lines of paragraph inside all card-features. */
+  }
+}
+
+/* social-icons */
+.social-list {
+  --gap: 1rem; /* flex */
+}
+
+.social-list img {
+  width: 25px;
+}
+
+/* ======================== */
+/* section specific         */
+/* ======================== */
+
+/* section */
+section {
+  padding-block: 6rem;
+}
+
+/* intro */
+.intro {
+  grid-template-rows: minmax(350px, 1fr) max-content;
+  grid-template-areas:
+    "image  image  image"
+    ".....  text   .....";
+
+  row-gap: 1.5rem;
+  padding-top: 0rem;
+}
+
+.intro > *:first-child {
+  grid-area: text;
+  align-items: center;
+  --flow-space: 1.5rem;
+}
+
+.intro > *:last-child {
+  grid-area: image;
+  place-self: stretch;
+}
+
+@media (min-width: 768px) {
+  .intro {
+    padding-bottom: 0;
+    min-height: 100vh;
+
+    grid-template-rows: minmax(480px, 1fr);
+    grid-template-areas: "....  text  text  image  image  image";
+  }
+}
+
+/* card containing section -- features & articles */
+@media (min-width: 768px) {
+  /* setting the first card */
+  p + .card,
+  h2 + .card {
+    grid-column: 2;
+  }
+
+  .card {
+    grid-column: span 1;
+  }
+
+  .features,
+  .articles {
+    align-items: stretch; /* so that every card height height will be same */
+  }
+}
+
+/* feature */
+.features {
+  row-gap: 1.5rem;
+  --separator-space: 2rem;
+}
+
+/* articles */
+
+.articles {
+  row-gap: 1.5rem;
+
+  --separator-space: 1.5rem;
+}
+
+/* footer */
+.footer {
+  padding-block: 3rem;
+  row-gap: 2rem;
+}
+
+@media (min-width: 868px) {
+  .footer {
+    row-gap: 0rem;
+
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+      ".....   logo           footer-links   footer-links   cta        ....."
+      ".....   .....          footer-links   footer-links   ......     ....."
+      ".....   social-links   footer-links   footer-links   fine-print .....";
+    place-items: end start;
+  }
+
+  .footer-logo-link {
+    grid-area: logo;
+  }
+
+  .social-list {
+    grid-area: social-links;
+  }
+
+  .footer-list {
+    --flow-space: 0;
+
+    grid-area: footer-links;
+    align-self: stretch;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(170px, 1fr));
+    grid-template-rows: 1fr 1fr 1fr;
+    align-items: flex-end;
+  }
+
+  .footer > .btn {
+    grid-area: cta;
+    justify-self: end;
+  }
+
+  .fine-print {
+    grid-area: fine-print;
+    justify-self: end;
+  }
+}
